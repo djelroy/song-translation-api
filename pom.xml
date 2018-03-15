@@ -5,14 +5,14 @@
 	<groupId>com.djelroy</groupId>
 	<artifactId>song-translation-api</artifactId>
 	<packaging>war</packaging>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.1</version>
 
 	<name>capoeira-songs Maven Webapp</name>
 	<url>http://maven.apache.org</url>
 
 	<properties>
-		<maven.compiler.source>1.9</maven.compiler.source>
-		<maven.compiler.target>1.9</maven.compiler.target>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
 		<spring-framework.version>5.0.3.RELEASE</spring-framework.version>
 		<hibernate.version>5.2.12.Final</hibernate.version>
 		<log4j.version>2.6.1</log4j.version>
@@ -141,7 +141,7 @@
 	</dependencies>
 
 	<build>
-		<finalName>song-translation-api</finalName>
+<!--		<finalName>song-translation-api</finalName> -->
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
