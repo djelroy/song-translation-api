@@ -1,0 +1,8 @@
+FROM mysql
+
+# Copy script that creates MySQL tables 
+# Any .sql, .sh files in /docker-entrypoint-initdb.d gets executed automatically
+COPY src/main/resources/scripts.sql /docker-entrypoint-initdb.d
+
+
+
