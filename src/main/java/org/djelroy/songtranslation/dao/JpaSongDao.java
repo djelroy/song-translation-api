@@ -1,5 +1,7 @@
 package org.djelroy.songtranslation.dao;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -44,5 +46,30 @@ public class JpaSongDao implements SongDao {
 		managedSong.setLyrics(song.getLyrics());
 
 		return managedSong;
+	}
+
+	@Override
+	public List<Song> getSongByArtist(String artist) {
+		return entityManager.createQuery("SELECT s FROM Song s WHERE s.artist = :artist", Song.class)
+				.setParameter("artist", artist).getResultList();
+	}
+
+	@Override
+	public List<Song> getSongsByTitle(String title) {
+		return entityManager.createQuery("SELECT s FROM Song s WHERE s.title = :title", Song.class)
+				.setParameter("title", title).getResultList();
+	}
+
+	@Override
+	public List<Song> getSongs(String title, String artist) {
+		return entityManager
+				.createQuery("SELECT s FROM Song s WHERE s.title = :title AND s.artist = :artist", Song.class)
+				.setParameter("title", title).setParameter("artist", artist).getResultList();
+	}
+
+	@Override
+	public List<Song> getSongs(int size) {
+		return entityManager.createQuery("SELECT s FROM Song s", Song.class).setMaxResults(size)
+				.getResultList();
 	}
 }
