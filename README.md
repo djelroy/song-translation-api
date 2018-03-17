@@ -1,9 +1,9 @@
 # Song Translation API
 
-Song Translation API is a Dockerized app to manage songs and their translations.
+Song Translation API is a web service to manage songs and their translations.
 It exposes RESTful HTTP endpoints to do basic operations on songs and their translations.
 
-Song Translation API can be deployed on multiple hosts.
+Song Translation API can be deployed on multiple hosts as a regular war or as a Dockerized app!
 
 ## Deployment
 
