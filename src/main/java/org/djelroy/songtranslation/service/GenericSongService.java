@@ -1,5 +1,7 @@
 package org.djelroy.songtranslation.service;
 
+import java.util.List;
+
 import javax.persistence.TransactionRequiredException;
 
 import org.apache.logging.log4j.LogManager;
@@ -54,6 +56,26 @@ public class GenericSongService implements SongService {
 	@Override
 	public Song update(Song song) {
 		return songDao.update(song);
+	}
+
+	@Override
+	public List<Song> getSongByArtist(String artist) {
+		return songDao.getSongByArtist(artist);
+	}
+
+	@Override
+	public List<Song> getSongsByTitle(String title) {
+		return songDao.getSongsByTitle(title);
+	}
+
+	@Override
+	public List<Song> getSong(String title, String artist) {
+		return songDao.getSongs(title, artist);
+	}
+
+	@Override
+	public List<Song> getSongs() {
+		return songDao.getSongs(100);
 	}
 
 }
