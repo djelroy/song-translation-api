@@ -4,6 +4,7 @@ import java.util.Properties;
 
 import javax.sql.DataSource;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -69,6 +70,10 @@ public class JpaConfiguration {
 		properties.put("hibernate.current_session_context_class",
 				environment.getRequiredProperty("hibernate.current_session_context_class"));
 
+		// For JUnit
+		if(StringUtils.isNotBlank(environment.getProperty("hibernate.hbm2ddl.auto"))) {
+			properties.put("hibernate.hbm2ddl.auto", environment.getProperty("hibernate.hbm2ddl.auto"));
+		}
 		return properties;
 	}
 }
