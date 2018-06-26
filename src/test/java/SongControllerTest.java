@@ -1,3 +1,8 @@
+
+import static org.hamcrest.CoreMatchers.*;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.notNullValue;
+import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -9,7 +14,6 @@ import java.util.List;
 
 import javax.servlet.ServletContext;
 
-import org.apache.commons.lang3.StringUtils;
 import org.djelroy.songtranslation.configuration.AppConfig;
 import org.djelroy.songtranslation.controller.SongController;
 import org.djelroy.songtranslation.domain.Song;
@@ -57,7 +61,7 @@ public class SongControllerTest {
 		Assert.assertNotNull(wac.getBean(SongController.class));
 	}
 
-    // @Test
+    @Test
 	public void shouldReturnHttpCreatedStatusWhenPostingASong() throws Exception {
 		final Song song = new Song("The fragrance of the Self", "Ramana Maharshi", "You are the effulgent Self");
 		final String songJson = mapper.writeValueAsString(song);
@@ -66,7 +70,7 @@ public class SongControllerTest {
 				.accept(MediaType.APPLICATION_JSON)).andExpect(status().isCreated()).andReturn();
 	}
 	
-//    @Test
+    @Test
 	public void shouldReturnSameSongWithNewIdWhenPostingASong() throws Exception {
 		
 		final Song songInput = new Song("Existence", "Dj Elroy", "Existence is the flower of miracles");
@@ -77,13 +81,13 @@ public class SongControllerTest {
 		
 		final Song songOutput = mapper.readValue(result.getResponse().getContentAsString(), new TypeReference<Song>() {});
 		
-		assertTrue("Returned song's title should be the same as the created one's", songOutput.getTitle().equals(songInput.getTitle()));
-		assertTrue("Returned song's artist should be the same as the created one's", songOutput.getArtist().equals(songInput.getArtist()));
-		assertTrue("Returned song's lyrics should be the same as the created one's", songOutput.getLyrics().equals(songInput.getLyrics()));
-		assertTrue("The returned song's id shouldn't be null", songOutput.getId() != null);
+		assertThat(songOutput.getTitle(), equalTo(songInput.getTitle()));
+		assertThat(songOutput.getArtist(), equalTo(songInput.getArtist()));
+		assertThat(songOutput.getLyrics(), equalTo(songInput.getLyrics()));
+		assertThat(songOutput.getId(), notNullValue());
 	}
     
-//	@Test
+	@Test
 	public void shouldReturnNotFound() throws Exception {
 		String title = URLEncoder.encode("TITLE_DONT_EXIST_GGZEZ000", StandardCharsets.UTF_8.name());
 		String artist = URLEncoder.encode("ARTIST_DONT_EXIST_GGZEZ000", StandardCharsets.UTF_8.name());
@@ -99,7 +103,7 @@ public class SongControllerTest {
 
 	}
 
-//	@Test
+	@Test
 	public void shouldReturnSongsOnlyWithSameTitle() throws Exception {
 
 		final Song songInput = new Song("The Best Title", "DJ Elroy", "My lyrics are on fire");
@@ -118,12 +122,12 @@ public class SongControllerTest {
 				});
 
 		if (songs != null) {
-			assertTrue("All the retrieved songs should have title = " + songInput.getTitle(),
-					songs.stream().allMatch(s -> StringUtils.equalsIgnoreCase(s.getTitle(), songInput.getTitle())));
+			songs.stream()
+					.forEach(s -> assertThat(s.getTitle().toLowerCase(), equalTo(songInput.getTitle().toLowerCase())));
 		}
 	}
 
-//	@Test
+	@Test
 	public void shouldReturnSongsOnlyWithSameArtist() throws Exception {
 
 		final Song songInput = new Song("You And I", "DJ Elroy", "You and I are one");
@@ -142,14 +146,22 @@ public class SongControllerTest {
 				});
 
 		if (songs != null) {
-			assertTrue("All the retrieved songs should have artist = " + songInput.getArtist(),
-					songs.stream().allMatch(s -> StringUtils.equalsIgnoreCase(s.getArtist(), songInput.getArtist())));
+			songs.stream().forEach(
+					s -> assertThat(s.getArtist().toLowerCase(), equalTo(songInput.getArtist().toLowerCase())));
 		}
 	}
 
-//	@Test
+	@Test
 	public void shouldReturn100SongsMax() throws Exception {
 
+		// Creating 105 songs
+		for(int i = 0; i < 105; i++) {
+			final Song song = new Song("The fragrance of the Self" + i, "Ramana Maharshi" + i, "You are the effulgent Self" + i);
+			final String songJson = mapper.writeValueAsString(song);
+			mockMvc.perform(post("/songs").content(songJson).contentType(MediaType.APPLICATION_JSON)
+				.accept(MediaType.APPLICATION_JSON)).andExpect(status().isCreated()).andReturn();
+		}
+		
 		final MvcResult result = mockMvc.perform(get("/songs").accept(MediaType.APPLICATION_JSON))
 				.andExpect(status().isOk()).andReturn();
 
