@@ -8,23 +8,47 @@ Song Translation API can be deployed on multiple hosts as a regular war or as a 
 
 ## Endpoints 
 
-* Find a song by ID
+1) Find a song by ID
 ```
 GET /songs/{songId}
 ```
-* Create a new song
+* Success
+
+```
+HTTP 200 OK
+```
+* Payload
+```
+  {
+    "id":1,
+    "title":"Midnight in Chelsea",
+    "artist":"Jon Bon Jovi",
+    "lyrics":"Sha la la la sha la la",
+    "language":"en"
+   }   
+```
+* Failure
+```
+HTTP 404 Not Found
+```
+* Errors
+```
+HTTP 500 Internal Server Error
+```
+
+2) Create a new song
 ```
 POST /songs
 ```
-* Update an existing song
+3) Update an existing song
 ```
 UPDATE /songs
 ```
-* Remove a song by ID
+4) Remove a song by ID
 ```
 DELETE /songs/{songId}
 ```
-* Get a collection of songs
+5) Get a collection of songs
 ```
 GET /songs
 ```
