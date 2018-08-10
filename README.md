@@ -27,7 +27,7 @@ HTTP 200 OK
     "language":"en"
    }   
 ```
-* Failure
+* Song not found
 ```
 HTTP 404 Not Found
 ```
