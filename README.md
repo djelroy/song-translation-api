@@ -5,6 +5,29 @@ It exposes RESTful HTTP endpoints to do basic operations on songs and their tran
 
 Song Translation API can be deployed on multiple hosts as a regular war or as a Dockerized app!
 
+
+## Endpoints 
+
+* Find a song by ID
+```
+GET /songs/{songId}
+```
+* Create a new song
+```
+POST /songs
+```
+* Update an existing song
+```
+UPDATE /songs
+```
+* Remove a song by ID
+```
+DELETE /songs/{songId}
+```
+* Get a collection of songs
+```
+GET /songs
+```
 ## Deployment
 
 Create a swarm manager
