@@ -15,7 +15,7 @@ services:
       placement:
         constraints: [node.role == manager]
   web:
-    image: djelroy/song-translation-api:http-rest-dev1
+    image: djelroy/song-translation-api:web-rest
     deploy:
       replicas: 3
       restart_policy:
