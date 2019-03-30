@@ -6,37 +6,21 @@ It exposes RESTful HTTP endpoints to do basic operations on songs and their tran
 Song Translation API can be deployed on multiple hosts as a regular war or as a Dockerized app!
 
 
+
 ## Endpoints 
 
-1) Find a song by ID
-```
+1) *Find a song by ID:* 
+``` 
 GET /songs/{songId}
 ```
-* Success
 
-```
-HTTP 200 OK
-```
-* Payload
-```
-  {
-    "id":1,
-    "title":"Midnight in Chelsea",
-    "artist":"Jon Bon Jovi",
-    "lyrics":"Sha la la la sha la la",
-    "language":"en"
-   }   
-```
-* Song not found
-```
-HTTP 404 Not Found
-```
-* Errors
-```
-HTTP 500 Internal Server Error
-```
+Response:
 
-2) Create a new song
+|Success | Song Not Found | Errors |
+| ------------- | ------------- | ------------- |
+| Code: <br>``` HTTP 200 OK ```  <br><br>Payload:<br>``` {```<br><pre>``` "id":1,``` <br> ``` "title":"Midnight in Chelsea", ```<br> "artist":"Jon Bon Jovi", <br> "lyrics":"Sha la la la sha la la", <br> "language":"en"<br>```}``` | ``` HTTP 404 Not Found ``` | ``` HTTP 500 Internal Server Error ```| 
+
+2) *Create a new song:*
 ```
 POST /songs
 ```
