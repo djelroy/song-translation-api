@@ -24,15 +24,15 @@ Response:
 ```
 POST /songs
 ```
-3) Update an existing song
+3) *Update an existing song*
 ```
 UPDATE /songs
 ```
-4) Remove a song by ID
+4) *Remove a song by ID*
 ```
 DELETE /songs/{songId}
 ```
-5) Get a collection of songs
+5) *Get a collection of songs*
 ```
 GET /songs
 ```
