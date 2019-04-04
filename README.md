@@ -6,6 +6,11 @@ It exposes RESTful HTTP endpoints to do basic operations on songs and their tran
 Song Translation API can be deployed on multiple hosts as a regular war or as a Dockerized app!
 
 
+*Note: This README will be soon completed.*
+
+## TODO:
+- [ ] Finish API endpoints docs
+- [ ] Improve deployment and installation docs
 
 ## Endpoints 
 
