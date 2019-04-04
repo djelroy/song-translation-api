@@ -1,54 +1,43 @@
 # Song Translation API
 
-Song Translation API is a web service to manage songs and their translations.
+Song Translation API is a microservice to manage songs and their translations.
 It exposes RESTful HTTP endpoints to do basic operations on songs and their translations.
 
 Song Translation API can be deployed on multiple hosts as a regular war or as a Dockerized app!
 
 
+*Note: This README will be soon completed.*
+
+## TODO:
+- [ ] Finish API endpoints docs
+- [ ] Improve deployment and installation docs
+
 ## Endpoints 
 
-1) Find a song by ID
-```
+1) *Find a song by ID:* 
+``` 
 GET /songs/{songId}
 ```
-* Success
 
-```
-HTTP 200 OK
-```
-* Payload
-```
-  {
-    "id":1,
-    "title":"Midnight in Chelsea",
-    "artist":"Jon Bon Jovi",
-    "lyrics":"Sha la la la sha la la",
-    "language":"en"
-   }   
-```
-* Song not found
-```
-HTTP 404 Not Found
-```
-* Errors
-```
-HTTP 500 Internal Server Error
-```
+Response:
 
-2) Create a new song
+|Success | Song Not Found | Errors |
+| ------------- | ------------- | ------------- |
+| Code: <br>``` HTTP 200 OK ```  <br><br>Payload:<br>``` {```<br><pre>``` "id":1,``` <br> ``` "title":"Midnight in Chelsea", ```<br> "artist":"Jon Bon Jovi", <br> "lyrics":"Sha la la la sha la la", <br> "language":"en"<br>```}``` | ``` HTTP 404 Not Found ``` | ``` HTTP 500 Internal Server Error ```| 
+
+2) *Create a new song:*
 ```
 POST /songs
 ```
-3) Update an existing song
+3) *Update an existing song*
 ```
 UPDATE /songs
 ```
-4) Remove a song by ID
+4) *Remove a song by ID*
 ```
 DELETE /songs/{songId}
 ```
-5) Get a collection of songs
+5) *Get a collection of songs*
 ```
 GET /songs
 ```
